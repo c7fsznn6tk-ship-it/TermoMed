@@ -15,7 +15,7 @@ export const terms: MedicalTerm[] = [
       'O corpo reage de forma descontrolada',
       'Geralmente tem origem infecciosa',
       'Pode comprometer varios orgaos',
-      'Situacao grave que exige urgencia.',
+      'Situacao grave que exige urgencia',
     ],
   },
   {
@@ -27,7 +27,7 @@ export const terms: MedicalTerm[] = [
       'Costuma deixar a regiao aumentada',
       'Pode formar cacifo a digitopressao',
       'Tem relacao com liquido fora dos vasos',
-      'Nome medico para inchaco.',
+      'Pode deixar a pele mais tensa',
     ],
   },
   {
@@ -39,7 +39,7 @@ export const terms: MedicalTerm[] = [
       'Pode vir com calafrios e mal-estar',
       'Costuma sugerir inflamacao ou infeccao',
       'Envolve aumento da temperatura corporal',
-      'Quando passa de valores normais, chamamos de febre.',
+      'Pode ser medida com termometro',
     ],
   },
   {
@@ -51,7 +51,7 @@ export const terms: MedicalTerm[] = [
       'Fica no torax',
       'Ajuda a avaliar tamanho e posicao do coracao',
       'Pode estar desviado em cardiomegalias',
-      'Nome do impulso apical palpavel.',
+      'Pode ser sentido com a mao no torax',
     ],
   },
   {
@@ -63,7 +63,7 @@ export const terms: MedicalTerm[] = [
       'Pode ser inocente ou patologico',
       'E descrito por foco, intensidade e irradiacao',
       'Aparece na ausculta com fluxo turbulento',
-      'Ruido cardiaco chamado sopro.',
+      'Pode mudar conforme a posicao ou manobras',
     ],
   },
   {
@@ -75,7 +75,7 @@ export const terms: MedicalTerm[] = [
       'Fica mais rapido no esforco ou na ansiedade',
       'E avaliado em arterias perifericas',
       'Tem ritmo, amplitude e frequencia',
-      'Batimento arterial palpavel.',
+      'Batimento arterial palpavel',
     ],
   },
   {
@@ -86,8 +86,8 @@ export const terms: MedicalTerm[] = [
       'Tem relacao com filtracao',
       'Pode aparecer em insuficiencia ou colica',
       'Envolve creatinina, ureia e diurese',
-      'Refere-se aos rins',
-      'Adjetivo medico para aquilo que e dos rins.',
+      'Refere-se a um orgao retroperitoneal',
+      'Tem relacao com producao de urina',
     ],
   },
   {
@@ -99,7 +99,7 @@ export const terms: MedicalTerm[] = [
       'Vem depois do jejuno',
       'Absorve sais biliares e vitamina B12',
       'Termina perto da valva ileocecal',
-      'Porcao final do intestino delgado.',
+      'Fica antes do intestino grosso',
     ],
   },
   {
@@ -111,7 +111,7 @@ export const terms: MedicalTerm[] = [
       'Pode ser ascendente, transverso, descendente ou sigmoide',
       'E avaliado em colonoscopia',
       'Participa da absorcao de agua e formacao das fezes',
-      'Segmento intestinal chamado colon.',
+      'Pode ser examinado por endoscopia baixa',
     ],
   },
   {
@@ -123,7 +123,7 @@ export const terms: MedicalTerm[] = [
       'Fica no olho',
       'Relaciona-se com a pupila',
       'Controla a quantidade de luz que entra',
-      'Parte colorida do olho.',
+      'Muda sua aparencia conforme a pigmentacao',
     ],
   },
   {
@@ -135,7 +135,7 @@ export const terms: MedicalTerm[] = [
       'Nao e a camada mais superficial',
       'Contem vasos, nervos e anexos cutaneos',
       'Fica abaixo da epiderme',
-      'Camada cutanea chamada derme.',
+      'Contem estruturas que nutrem a pele',
     ],
   },
   {
@@ -147,7 +147,7 @@ export const terms: MedicalTerm[] = [
       'Pode aparecer em mucosas',
       'No estomago, pode ter relacao com H. pylori',
       'E uma perda de substancia do revestimento',
-      'Forma latina/sem acento de ulcera.',
+      'Forma latina ou sem acento de ulcera',
     ],
   },
   {
@@ -159,7 +159,7 @@ export const terms: MedicalTerm[] = [
       'Pode ser benigno ou maligno',
       'Pode ser palpavel ou visto em imagem',
       'Representa aumento de volume ou massa',
-      'Termo medico para massa ou neoplasia.',
+      'Pode ter origem inflamatoria ou neoplasica',
     ],
   },
   {
@@ -171,7 +171,7 @@ export const terms: MedicalTerm[] = [
       'Pode causar surtos e epidemias',
       'Depende de celulas para se multiplicar',
       'Pode ser prevenido por algumas vacinas',
-      'Agente infeccioso acelular.',
+      'Agente infeccioso acelular',
     ],
   },
   {
@@ -183,7 +183,7 @@ export const terms: MedicalTerm[] = [
       'Envolve contracoes uterinas',
       'E dividido em periodos',
       'Termina com nascimento e dequitacao',
-      'Processo de nascimento.',
+      'Pode ocorrer apos trabalho progressivo',
     ],
   },
   {
@@ -195,7 +195,7 @@ export const terms: MedicalTerm[] = [
       'Podem apresentar nodulos ou secrecao',
       'Tem relacao com lactacao',
       'Sao rastreadas por mamografia',
-      'Glandulas mamarias.',
+      'Podem mudar durante gestacao e lactacao',
     ],
   },
   {
@@ -207,7 +207,7 @@ export const terms: MedicalTerm[] = [
       'Pode ser sensitivo, motor ou misto',
       'Sua lesao pode causar dor, fraqueza ou dormencia',
       'E formado por fibras neuronais',
-      'Estrutura neurologica chamada nervo.',
+      'Pode transmitir sinais sensitivos ou motores',
     ],
   },
   {
@@ -219,7 +219,7 @@ export const terms: MedicalTerm[] = [
       'Indica estruturas em dupla',
       'Na neurologia, costuma vir junto de cranianos',
       'Existem doze quando falamos dos cranianos',
-      'Plural usado em pares cranianos.',
+      'Pode nomear estruturas bilaterais',
     ],
   },
   {
@@ -231,7 +231,7 @@ export const terms: MedicalTerm[] = [
       'Historicamente causou paralisia infantil',
       'Pode acometer neuronios motores',
       'Tem relacao com paralisia flacida aguda',
-      'Forma curta de poliomielite.',
+      'Forma curta de poliomielite',
     ],
   },
   {
@@ -243,7 +243,7 @@ export const terms: MedicalTerm[] = [
       'E um sintoma respiratorio comum',
       'Pode vir com secrecao, febre ou falta de ar',
       'E um reflexo de defesa das vias aereas',
-      'Ato de expulsar ar para limpar as vias respiratorias.',
+      'Pode piorar a noite ou com irritantes',
     ],
   },
   {
@@ -255,7 +255,7 @@ export const terms: MedicalTerm[] = [
       'Pode ocorrer na pele, musculo, nervo ou orgao',
       'Pode ser descrita por tamanho, forma e local',
       'Indica dano ou alteracao de tecido',
-      'Termo geral para dano anatomico ou funcional.',
+      'Pode ser estrutural ou funcional',
     ],
   },
   {
@@ -267,7 +267,7 @@ export const terms: MedicalTerm[] = [
       'Podem ficar dilatadas em varizes',
       'Podem ser usadas para acesso venoso',
       'Levam sangue em direcao ao coracao',
-      'Vasos opostos as arterias no retorno circulatorio.',
+      'Podem ser visiveis sob a pele',
     ],
   },
   {
@@ -276,10 +276,10 @@ export const terms: MedicalTerm[] = [
     category: 'Otorrinolaringologia',
     hints: [
       'Tem relacao com um sentido',
-      'Pode aparecer em gotas ou solucao',
+      'Adjetivo medico para o que e do ouvido',
       'Refere-se a estrutura avaliada pelo otoscopio',
       'Esta ligado ao ouvido',
-      'Adjetivo medico para o que e do ouvido.',
+      'Loja que vende óculos (masculino)',
     ],
   },
   {
@@ -291,7 +291,7 @@ export const terms: MedicalTerm[] = [
       'Tem pelos e glandulas sudoriparas',
       'Pode ter linfonodos palpaveis',
       'Fica abaixo do ombro',
-      'Regiao popularmente chamada sovaco.',
+      'E regiao comum para afericao de temperatura',
     ],
   },
   {
@@ -303,7 +303,7 @@ export const terms: MedicalTerm[] = [
       'Indica uma depressao ou cavidade',
       'Pode ser nasal, iliaca ou poplitea',
       'Ajuda a localizar estruturas no exame',
-      'Nome anatomico para uma depressao.',
+      'Pode ajudar a nomear regioes do corpo',
     ],
   },
   {
@@ -315,7 +315,7 @@ export const terms: MedicalTerm[] = [
       'Tambem pode lembrar calafrios intensos',
       'Tem relacao com endurecimento ou rigidez',
       'Em ingles medico, pode significar calafrio importante',
-      'Termo associado a rigidez.',
+      'Pode aparecer junto de febre alta',
     ],
   },
   {
@@ -327,7 +327,7 @@ export const terms: MedicalTerm[] = [
       'Envolve mais casos que o esperado',
       'E investigado pela vigilancia epidemiologica',
       'Pode ter origem infecciosa ou alimentar',
-      'Aumento localizado de casos.',
+      'Aumento localizado de casos',
     ],
   },
   {
@@ -339,7 +339,7 @@ export const terms: MedicalTerm[] = [
       'Pode reduzir a necessidade de sono',
       'Pode cursar com impulsividade e grandiosidade',
       'E um polo do transtorno bipolar',
-      'Episodio de humor elevado chamado mania.',
+      'Pode vir com fala acelerada e pouca necessidade de sono',
     ],
   },
   {
@@ -351,7 +351,7 @@ export const terms: MedicalTerm[] = [
       'Avalia cinco criterios do recem-nascido',
       'Costuma ser medido no primeiro e quinto minuto',
       'Inclui cor, pulso, grimaca, atividade e respiracao',
-      'Escore neonatal chamado Apgar.',
+      'Escore neonatal chamado Apgar',
     ],
   },
   {
@@ -363,7 +363,7 @@ export const terms: MedicalTerm[] = [
       'Pode ser observado pelo examinador',
       'Pode aparecer no exame fisico',
       'E um achado objetivo',
-      'Termo semiologico oposto a queixa subjetiva.',
+      'Ajuda o examinador a sustentar uma hipotese clinica',
     ],
   },
 ];
