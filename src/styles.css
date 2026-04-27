@@ -204,6 +204,11 @@ button {
   background: rgba(246, 241, 228, 0.78);
 }
 
+.tile.active {
+  border-color: var(--green);
+  box-shadow: 0 0 0 2px rgba(35, 133, 111, 0.22);
+}
+
 .tile.correct,
 .key.correct {
   background: var(--green);
@@ -571,33 +576,48 @@ button {
 
   .keyboard {
     align-self: end;
-    width: min(100%, 344px);
+    width: calc(100vw - 16px);
+    max-width: 344px;
     gap: 5px;
     padding-top: 0;
     padding-bottom: 0;
+    overflow: hidden;
   }
 
   .keyboard-row {
+    display: grid;
     gap: 4px;
+    width: 100%;
+  }
+
+  .keyboard-row:nth-child(1),
+  .keyboard-row:nth-child(2) {
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+  }
+
+  .keyboard-row:nth-child(3) {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    padding-inline: 20px;
   }
 
   .key {
     height: clamp(36px, 6.2vh, 44px);
-    flex: 1 1 0;
+    width: 100%;
+    flex: initial;
     min-width: 0;
     border-radius: 4px;
     background: #d9d1bd;
     color: #173b34;
-    font-size: 0.92rem;
+    font-size: 0.84rem;
   }
 
   .key.wide {
-    flex: 1.35 1 0;
-    font-size: 0.68rem;
+    flex: initial;
+    font-size: 0.62rem;
   }
 
   .enter-key {
-    flex: 1.65 1 0;
+    width: 100%;
   }
 
   .term-count {
@@ -649,10 +669,18 @@ button {
 
   .key {
     height: clamp(32px, 5.8vh, 40px);
-    font-size: 0.86rem;
+    font-size: 0.78rem;
   }
 
   .key.wide {
     font-size: 0.62rem;
+  }
+
+  .keyboard-row {
+    gap: 3px;
+  }
+
+  .keyboard-row:nth-child(3) {
+    padding-inline: 16px;
   }
 }

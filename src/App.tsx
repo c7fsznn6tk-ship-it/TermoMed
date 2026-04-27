@@ -9,6 +9,7 @@ import { pickRandomTerm } from './game/pickTerm';
 const WORD_LENGTH = 5;
 const MAX_ATTEMPTS = 6;
 const rows = Array.from({ length: MAX_ATTEMPTS });
+const emptyGuess = () => Array.from({ length: WORD_LENGTH }, () => '');
 const keyboardRows = [
   { letters: 'qwertyuiop', enter: false, backspace: false },
   { letters: 'asdfghjkl', enter: true, backspace: false },
@@ -48,7 +49,8 @@ function saveStats(stats: Stats) {
 function App() {
   const [answer, setAnswer] = useState<MedicalTerm>(() => pickRandomTerm());
   const [guesses, setGuesses] = useState<string[]>([]);
-  const [currentGuess, setCurrentGuess] = useState('');
+  const [currentLetters, setCurrentLetters] = useState<string[]>(() => emptyGuess());
+  const [activeIndex, setActiveIndex] = useState(0);
   const [message, setMessage] = useState('Treino guiado: descubra o termo medico.');
   const [showHelp, setShowHelp] = useState(false);
   const [showStats, setShowStats] = useState(false);
@@ -80,7 +82,8 @@ function App() {
   function resetGame() {
     setAnswer((previous) => pickRandomTerm(previous.word));
     setGuesses([]);
-    setCurrentGuess('');
+    setCurrentLetters(emptyGuess());
+    setActiveIndex(0);
     setFinished(false);
     setWon(false);
     setMessage('Novo termo sorteado.');
@@ -107,14 +110,14 @@ function App() {
   }
 
   function submitGuess() {
-    const normalized = normalizeWord(currentGuess);
+    const normalized = normalizeWord(currentLetters.join(''));
 
     if (finished) {
       return;
     }
 
-    if (normalized.length !== WORD_LENGTH) {
-      setMessage('Digite uma palavra com 5 letras.');
+    if (currentLetters.some((letter) => !letter) || normalized.length !== WORD_LENGTH) {
+      setMessage('Preencha as 5 letras antes de enviar.');
       return;
     }
 
@@ -127,7 +130,8 @@ function App() {
     const didWin = normalized === answer.word;
     const didLose = nextGuesses.length === MAX_ATTEMPTS && !didWin;
     setGuesses(nextGuesses);
-    setCurrentGuess('');
+    setCurrentLetters(emptyGuess());
+    setActiveIndex(0);
 
     if (didWin || didLose) {
       setFinished(true);
@@ -148,13 +152,29 @@ function App() {
     }
 
     if (key === 'Backspace') {
-      setCurrentGuess((value) => value.slice(0, -1));
+      setCurrentLetters((value) => {
+        const next = [...value];
+        if (next[activeIndex]) {
+          next[activeIndex] = '';
+          return next;
+        }
+
+        const previousIndex = Math.max(0, activeIndex - 1);
+        next[previousIndex] = '';
+        setActiveIndex(previousIndex);
+        return next;
+      });
       return;
     }
 
     const normalized = normalizeWord(key);
     if (/^[a-z]$/.test(normalized)) {
-      setCurrentGuess((value) => (value.length < WORD_LENGTH ? value + normalized : value));
+      setCurrentLetters((value) => {
+        const next = [...value];
+        next[activeIndex] = normalized;
+        return next;
+      });
+      setActiveIndex((value) => Math.min(WORD_LENGTH - 1, value + 1));
     }
   }
 
@@ -207,17 +227,28 @@ function App() {
           {rows.map((_, rowIndex) => {
             const guess = guesses[rowIndex];
             const evaluation = evaluations[rowIndex];
-            const letters = guess ?? (rowIndex === guesses.length ? currentGuess : '');
+            const isCurrentRow = rowIndex === guesses.length && !finished;
+            const letters = guess ?? (isCurrentRow ? currentLetters.join('') : '');
 
             return (
               <div className="board-row" key={rowIndex}>
                 {Array.from({ length: WORD_LENGTH }).map((__, cellIndex) => {
                   const evaluated = evaluation?.[cellIndex] as EvaluatedLetter | undefined;
-                  const letter = letters[cellIndex] ?? '';
+                  const letter = isCurrentRow ? currentLetters[cellIndex] : (letters[cellIndex] ?? '');
+                  const isActive = isCurrentRow && activeIndex === cellIndex;
                   return (
-                    <div className={`tile ${evaluated?.state ?? (letter ? 'filled' : '')}`} key={cellIndex}>
+                    <button
+                      className={`tile ${evaluated?.state ?? (letter ? 'filled' : '')} ${isActive ? 'active' : ''}`}
+                      key={cellIndex}
+                      type="button"
+                      onClick={() => {
+                        if (isCurrentRow) {
+                          setActiveIndex(cellIndex);
+                        }
+                      }}
+                    >
                       {letter}
-                    </div>
+                    </button>
                   );
                 })}
               </div>
@@ -283,8 +314,8 @@ function App() {
       {showHelp && (
         <Modal title="Como jogar" onClose={() => setShowHelp(false)}>
           <p>
-            Descubra o termo medico em 6 tentativas. Nesta versao de treino, qualquer palavra alfabetica de
-            5 letras e aceita como tentativa.
+            Descubra o termo medico em 6 tentativas. Toque em qualquer casa da linha ativa para escolher onde
+            digitar. Qualquer palavra alfabetica de 5 letras e aceita como tentativa.
           </p>
           <div className="example-row">
             <span className="tile correct">s</span>
