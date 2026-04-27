@@ -9,7 +9,11 @@ import { pickRandomTerm } from './game/pickTerm';
 const WORD_LENGTH = 5;
 const MAX_ATTEMPTS = 6;
 const rows = Array.from({ length: MAX_ATTEMPTS });
-const keyboardRows = ['qwertyuiop', 'asdfghjkl', 'zxcvbnm'];
+const keyboardRows = [
+  { letters: 'qwertyuiop', enter: false, backspace: false },
+  { letters: 'asdfghjkl', enter: true, backspace: false },
+  { letters: 'zxcvbnm', enter: false, backspace: true },
+];
 const stateRank: Record<LetterState, number> = { absent: 1, present: 2, correct: 3 };
 
 type Stats = {
@@ -194,13 +198,7 @@ function App() {
         </div>
       </header>
 
-      <section className="mode-strip single" aria-label="Modo de jogo">
-        <button className="active" type="button">
-          Treino guiado
-        </button>
-      </section>
-
-      <p className="status-message" role="status">
+      <p className="status-message sr-only" role="status">
         {message}
       </p>
 
@@ -257,13 +255,8 @@ function App() {
 
       <section className="keyboard" aria-label="Teclado virtual">
         {keyboardRows.map((row) => (
-          <div className="keyboard-row" key={row}>
-            {row === 'zxcvbnm' && (
-              <button className="key wide" type="button" onClick={() => submitGuess()}>
-                Enter
-              </button>
-            )}
-            {row.split('').map((letter) => (
+          <div className="keyboard-row" key={row.letters}>
+            {row.letters.split('').map((letter) => (
               <button
                 className={`key ${keyStates[letter] ?? ''}`}
                 type="button"
@@ -273,7 +266,12 @@ function App() {
                 {letter}
               </button>
             ))}
-            {row === 'zxcvbnm' && (
+            {row.enter && (
+              <button className="key wide enter-key" type="button" onClick={() => submitGuess()}>
+                Enter
+              </button>
+            )}
+            {row.backspace && (
               <button className="key wide" type="button" onClick={() => handleInput('Backspace')} aria-label="Apagar">
                 <X size={20} />
               </button>

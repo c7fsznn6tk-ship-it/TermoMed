@@ -7,18 +7,18 @@
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  --bg: #2f3034;
-  --panel: #252629;
-  --panel-soft: #3a3b40;
-  --line: #5a5b62;
-  --text: #f7f4ef;
-  --muted: #c7c2bd;
-  --green: #2fae93;
-  --yellow: #d8b15d;
-  --absent: #171719;
-  --danger: #c26464;
-  --key: #464247;
-  --key-text: #ffffff;
+  --bg: #eef3e8;
+  --panel: #f6f1e4;
+  --panel-soft: #dfe9d8;
+  --line: #9aac96;
+  --text: #173b34;
+  --muted: #667467;
+  --green: #23856f;
+  --yellow: #cda85a;
+  --absent: #31413b;
+  --danger: #b85f5f;
+  --key: #e4dcc8;
+  --key-text: #173b34;
 }
 
 * {
@@ -31,13 +31,25 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   background:
-    radial-gradient(circle at 20% 10%, rgba(47, 174, 147, 0.16), transparent 28rem),
-    linear-gradient(145deg, #34363a 0%, #62545a 100%);
+    radial-gradient(circle at 18% 8%, rgba(35, 133, 111, 0.22), transparent 25rem),
+    linear-gradient(145deg, #eef3e8 0%, #d7e4d3 48%, #f0e5cd 100%);
 }
 
 button {
   border: 0;
   font: inherit;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .app-shell {
@@ -47,7 +59,7 @@ button {
   margin: 0 auto;
   padding: 10px clamp(12px, 3vw, 32px) 14px;
   display: grid;
-  grid-template-rows: auto auto auto 1fr auto auto auto;
+  grid-template-rows: auto 1fr auto auto auto;
   gap: 10px;
 }
 
@@ -92,13 +104,13 @@ button {
   align-items: center;
   justify-content: center;
   color: var(--text);
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(246, 241, 228, 0.7);
+  border: 1px solid rgba(23, 59, 52, 0.22);
   cursor: pointer;
 }
 
 .icon-button:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.84);
 }
 
 .icon-button:disabled {
@@ -114,8 +126,8 @@ button {
   grid-template-columns: 1fr 1fr;
   gap: 4px;
   border-radius: 8px;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(23, 59, 52, 0.08);
+  border: 1px solid rgba(23, 59, 52, 0.14);
 }
 
 .mode-strip.single {
@@ -178,8 +190,8 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.08);
-  border: 2px solid rgba(255, 255, 255, 0.08);
+  background: rgba(246, 241, 228, 0.54);
+  border: 2px solid rgba(23, 59, 52, 0.12);
   color: var(--text);
   font-size: clamp(1.45rem, 6vw, 2.25rem);
   font-weight: 900;
@@ -189,7 +201,7 @@ button {
 
 .tile.filled {
   border-color: var(--line);
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(246, 241, 228, 0.78);
 }
 
 .tile.correct,
@@ -219,8 +231,8 @@ button {
   margin: 0;
   padding: 12px 14px;
   border-radius: 8px;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(246, 241, 228, 0.78);
+  border: 1px solid rgba(23, 59, 52, 0.13);
 }
 
 .hints-title {
@@ -259,8 +271,8 @@ button {
   gap: 12px;
   align-items: center;
   border-radius: 8px;
-  background: rgba(0, 0, 0, 0.24);
-  border: 1px solid rgba(255, 255, 255, 0.13);
+  background: rgba(246, 241, 228, 0.82);
+  border: 1px solid rgba(23, 59, 52, 0.14);
 }
 
 .result-panel.win {
@@ -353,7 +365,7 @@ button {
   display: grid;
   place-items: center;
   padding: 16px;
-  background: rgba(10, 10, 12, 0.68);
+  background: rgba(23, 59, 52, 0.5);
   z-index: 10;
 }
 
@@ -363,8 +375,8 @@ button {
   overflow: auto;
   padding: 18px;
   border-radius: 8px;
-  background: #252326;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: #f6f1e4;
+  border: 1px solid rgba(23, 59, 52, 0.16);
   box-shadow: 0 22px 70px rgba(0, 0, 0, 0.35);
 }
 
@@ -463,16 +475,18 @@ button {
 @media (max-width: 620px) {
   body {
     overflow-x: hidden;
-    background: #725f66;
+    background: #e8efe2;
   }
 
   .app-shell {
     width: 100%;
     min-height: 100dvh;
     padding: 6px 8px max(6px, env(safe-area-inset-bottom));
-    grid-template-rows: auto auto 1fr auto;
+    grid-template-rows: auto 1fr auto;
     gap: 4px;
-    background: #725f66;
+    background:
+      radial-gradient(circle at 14% 8%, rgba(35, 133, 111, 0.18), transparent 16rem),
+      linear-gradient(160deg, #eef3e8 0%, #dfe9d8 55%, #efe3c9 100%);
   }
 
   .topbar {
@@ -494,8 +508,8 @@ button {
     width: 31px;
     height: 31px;
     border-radius: 7px;
-    background: rgba(45, 39, 43, 0.18);
-    border-color: rgba(255, 255, 255, 0.34);
+    background: rgba(246, 241, 228, 0.48);
+    border-color: rgba(23, 59, 52, 0.24);
   }
 
   .icon-button svg {
@@ -542,8 +556,8 @@ button {
     font-size: clamp(1.45rem, 7vw, 1.75rem);
     border-radius: 5px;
     border-width: 2px;
-    background: rgba(52, 45, 50, 0.36);
-    border-color: rgba(43, 36, 40, 0.34);
+    background: rgba(246, 241, 228, 0.5);
+    border-color: rgba(23, 59, 52, 0.16);
   }
 
   .hints-title {
@@ -557,27 +571,33 @@ button {
 
   .keyboard {
     align-self: end;
-    width: 100%;
-    gap: 4px;
+    width: min(100%, 344px);
+    gap: 5px;
     padding-top: 0;
     padding-bottom: 0;
   }
 
   .keyboard-row {
-    gap: 3px;
+    gap: 4px;
   }
 
   .key {
-    height: clamp(36px, 6.4vh, 46px);
-    flex-basis: 10%;
+    height: clamp(36px, 6.2vh, 44px);
+    flex: 1 1 0;
+    min-width: 0;
     border-radius: 4px;
-    background: #40383d;
-    font-size: 0.98rem;
+    background: #d9d1bd;
+    color: #173b34;
+    font-size: 0.92rem;
   }
 
   .key.wide {
-    flex-basis: 78px;
-    font-size: 0.78rem;
+    flex: 1.35 1 0;
+    font-size: 0.68rem;
+  }
+
+  .enter-key {
+    flex: 1.65 1 0;
   }
 
   .term-count {
@@ -628,12 +648,11 @@ button {
   }
 
   .key {
-    height: clamp(33px, 6vh, 42px);
-    font-size: 0.92rem;
+    height: clamp(32px, 5.8vh, 40px);
+    font-size: 0.86rem;
   }
 
   .key.wide {
-    flex-basis: 72px;
-    font-size: 0.72rem;
+    font-size: 0.62rem;
   }
 }
