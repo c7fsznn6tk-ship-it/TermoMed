@@ -163,10 +163,10 @@ button {
 .game-area {
   align-self: center;
   justify-self: center;
-  width: min(100%, 820px);
+  width: min(100%, 760px);
   display: grid;
-  grid-template-columns: minmax(300px, 390px) minmax(240px, 320px);
-  gap: clamp(18px, 4vw, 44px);
+  grid-template-columns: minmax(280px, 340px) minmax(240px, 320px);
+  gap: clamp(16px, 3vw, 36px);
   align-items: center;
   justify-content: center;
 }
@@ -187,14 +187,14 @@ button {
 .tile {
   width: 100%;
   aspect-ratio: 1;
-  border-radius: 8px;
+  border-radius: 7px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.08);
-  border: 3px solid rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.08);
   color: var(--text);
-  font-size: clamp(1.7rem, 8vw, 2.8rem);
+  font-size: clamp(1.45rem, 6vw, 2.25rem);
   font-weight: 900;
   text-transform: uppercase;
   line-height: 1;
@@ -492,14 +492,14 @@ button {
   }
 
   .game-area {
-    width: min(100%, 340px);
+    width: min(100%, 300px);
     grid-template-columns: 1fr;
     gap: 10px;
   }
 
   .board {
-    width: min(100%, 340px);
-    gap: 6px;
+    width: min(100%, 300px);
+    gap: 5px;
   }
 
   .hints-panel {
@@ -507,11 +507,11 @@ button {
   }
 
   .board-row {
-    gap: 6px;
+    gap: 5px;
   }
 
   .tile {
-    border-radius: 7px;
+    border-radius: 6px;
     border-width: 2px;
   }
 
