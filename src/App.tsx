@@ -256,25 +256,11 @@ function App() {
           })}
         </section>
 
-        <section className={`hints-panel ${revealedHints.length === 0 ? 'empty' : ''}`} aria-label="Dicas">
-          <div className="hints-title">
-            <Lightbulb size={18} />
-            <span>Dicas</span>
-          </div>
-          {revealedHints.length === 0 ? (
-            <p>Nenhuma dica liberada ainda.</p>
-          ) : (
-            <ol>
-              {revealedHints.map((_, index) => (
-                <li key={answer.hints[index]}>{answer.hints[index]}</li>
-              ))}
-            </ol>
-          )}
-        </section>
+        <HintsPanel hints={answer.hints} revealedCount={revealedHints.length} />
       </div>
 
       {finished && (
-        <section className={`result-panel ${won ? 'win' : 'loss'}`}>
+        <section className={`result-panel ${won ? 'win' : 'loss'}`} role="dialog" aria-live="polite">
           <div>
             <span>{won ? 'Acertou' : 'Resposta'}</span>
             <strong>{answer.word.toUpperCase()}</strong>
@@ -310,6 +296,8 @@ function App() {
           </div>
         ))}
       </section>
+
+      <HintsPanel hints={answer.hints} revealedCount={revealedHints.length} mobileOnly />
 
       {showHelp && (
         <Modal title="Como jogar" onClose={() => setShowHelp(false)}>
@@ -372,6 +360,37 @@ function Modal({ title, children, onClose }: { title: string; children: ReactNod
         {children}
       </div>
     </div>
+  );
+}
+
+function HintsPanel({
+  hints,
+  revealedCount,
+  mobileOnly = false,
+}: {
+  hints: string[];
+  revealedCount: number;
+  mobileOnly?: boolean;
+}) {
+  return (
+    <section
+      className={`hints-panel ${revealedCount === 0 ? 'empty' : ''} ${mobileOnly ? 'mobile-hints' : 'desktop-hints'}`}
+      aria-label="Dicas"
+    >
+      <div className="hints-title">
+        <Lightbulb size={18} />
+        <span>Dicas</span>
+      </div>
+      {revealedCount === 0 ? (
+        <p>Nenhuma dica liberada ainda.</p>
+      ) : (
+        <ol>
+          {hints.slice(0, revealedCount).map((hint) => (
+            <li key={hint}>{hint}</li>
+          ))}
+        </ol>
+      )}
+    </section>
   );
 }
 
