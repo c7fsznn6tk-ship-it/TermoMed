@@ -113,3 +113,29 @@ git push -u origin main
 ```
 
 Substitua `SEU_USUARIO` pelo seu usuario do GitHub.
+
+## Publicar No GitHub Pages
+
+Este projeto ja inclui um workflow em `.github/workflows/deploy.yml`.
+
+Depois de enviar os arquivos para o GitHub:
+
+1. Abra o repositorio no GitHub.
+2. Va em `Settings`.
+3. Va em `Pages`.
+4. Em `Build and deployment`, selecione `GitHub Actions`.
+5. Va em `Actions` e aguarde o workflow `Deploy to GitHub Pages` finalizar.
+
+O Vite esta configurado com:
+
+```ts
+base: '/TermoMed/'
+```
+
+Isso e necessario porque o site sera acessado em uma subpasta:
+
+```txt
+https://c7fsznn6tk-ship-it.github.io/TermoMed/
+```
+
+Se o nome do repositorio mudar, atualize o `base` em `vite.config.ts` para o novo nome.
