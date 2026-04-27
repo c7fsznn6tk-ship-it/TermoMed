@@ -39,6 +39,21 @@ button {
   font: inherit;
 }
 
+.mobile-text-input {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: transparent;
+  caret-color: transparent;
+  pointer-events: none;
+}
+
 .app-shell {
   width: min(100%, 1040px);
   min-height: 100vh;

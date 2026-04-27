@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import { BarChart3, BookOpen, HeartPulse, HelpCircle, Lightbulb, RotateCcw, X } from 'lucide-react';
 import { terms, type MedicalTerm } from './data/terms';
@@ -42,6 +42,7 @@ function saveStats(stats: Stats) {
 }
 
 function App() {
+  const mobileInputRef = useRef<HTMLInputElement>(null);
   const [answer, setAnswer] = useState<MedicalTerm>(() => pickRandomTerm());
   const [guesses, setGuesses] = useState<string[]>([]);
   const [currentGuess, setCurrentGuess] = useState('');
@@ -154,6 +155,22 @@ function App() {
     }
   }
 
+  function focusMobileInput() {
+    mobileInputRef.current?.focus({ preventScroll: true });
+  }
+
+  function handleMobileInput(value: string) {
+    const normalized = normalizeWord(value);
+    if (!normalized) {
+      return;
+    }
+
+    normalized.split('').forEach((letter) => handleInput(letter));
+    if (mobileInputRef.current) {
+      mobileInputRef.current.value = '';
+    }
+  }
+
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {
       handleInput(event.key);
@@ -166,7 +183,26 @@ function App() {
   const winRate = stats.played ? Math.round((stats.wins / stats.played) * 100) : 0;
 
   return (
-    <main className="app-shell">
+    <main className="app-shell" onClick={focusMobileInput}>
+      <input
+        ref={mobileInputRef}
+        className="mobile-text-input"
+        type="text"
+        inputMode="text"
+        autoCapitalize="none"
+        autoComplete="off"
+        autoCorrect="off"
+        spellCheck={false}
+        aria-label="Campo de digitacao mobile"
+        onChange={(event) => handleMobileInput(event.target.value)}
+        onKeyDown={(event) => {
+          event.stopPropagation();
+          if (event.key === 'Enter' || event.key === 'Backspace') {
+            event.preventDefault();
+            handleInput(event.key);
+          }
+        }}
+      />
       <header className="topbar">
         <div className="topbar-actions">
           <button className="icon-button" type="button" onClick={() => setShowHelp(true)} aria-label="Ajuda">
@@ -181,7 +217,15 @@ function App() {
           <button className="icon-button" type="button" onClick={() => setShowStats(true)} aria-label="Estatisticas">
             <BarChart3 size={22} />
           </button>
-          <button className="icon-button" type="button" onClick={() => resetGame()} aria-label="Reiniciar treino">
+          <button
+            className="icon-button"
+            type="button"
+            onClick={() => {
+              resetGame();
+              focusMobileInput();
+            }}
+            aria-label="Reiniciar treino"
+          >
             <RotateCcw size={22} />
           </button>
         </div>
@@ -198,7 +242,7 @@ function App() {
       </p>
 
       <div className="game-area">
-        <section className="board" aria-label="Tabuleiro">
+        <section className="board" aria-label="Tabuleiro" onClick={focusMobileInput}>
           {rows.map((_, rowIndex) => {
             const guess = guesses[rowIndex];
             const evaluation = evaluations[rowIndex];
