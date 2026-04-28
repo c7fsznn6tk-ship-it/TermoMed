@@ -327,7 +327,7 @@ button {
   box-shadow: 0 18px 55px rgba(23, 59, 52, 0.26);
 }
 
-.result-panel.win {
+.result-panel.illustrated {
   width: min(92vw, 680px);
   min-height: 250px;
   grid-template-columns: 34px 1fr;
@@ -350,7 +350,7 @@ button {
   gap: 8px;
 }
 
-.result-panel.win .result-content {
+.result-panel.illustrated .result-content {
   min-height: 178px;
   align-content: center;
   margin-left: -92px;
@@ -394,6 +394,11 @@ button {
 
 .result-panel.win strong {
   color: var(--green);
+  font-size: clamp(1.75rem, 4vw, 2.4rem);
+}
+
+.result-panel.loss strong {
+  color: var(--danger);
   font-size: clamp(1.75rem, 4vw, 2.4rem);
 }
 
@@ -739,7 +744,7 @@ button {
     top: 38%;
   }
 
-  .result-panel.win {
+  .result-panel.illustrated {
     width: min(calc(100vw - 18px), 380px);
     min-height: 194px;
     grid-template-columns: 96px 1fr;
@@ -756,25 +761,25 @@ button {
     transform: translateX(-28px);
   }
 
-  .result-panel.win .result-content {
+  .result-panel.illustrated .result-content {
     min-height: 150px;
     margin-left: -54px;
     padding: 18px 18px 18px 120px;
     border-radius: 24px;
   }
 
-  .result-panel.win strong {
+  .result-panel.illustrated strong {
     font-size: 1.48rem;
   }
 
-  .result-panel.win p {
+  .result-panel.illustrated p {
     max-width: 210px;
     font-size: 0.82rem;
     line-height: 1.28;
   }
 
-  .result-panel.win small,
-  .result-panel.win span {
+  .result-panel.illustrated small,
+  .result-panel.illustrated span {
     font-size: 0.72rem;
   }
 

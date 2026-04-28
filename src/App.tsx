@@ -5,6 +5,7 @@ import { terms, type MedicalTerm } from './data/terms';
 import { evaluateGuess, type EvaluatedLetter, type LetterState } from './game/evaluateGuess';
 import { normalizeWord } from './game/normalizeWord';
 import { pickRandomTerm } from './game/pickTerm';
+import doctorWrong from './images/DeAssisErrou.webp';
 import doctorThumbsUp from './images/DeAssisPolegar01.webp';
 
 const WORD_LENGTH = 5;
@@ -325,14 +326,12 @@ function App() {
       </div>
 
       {finished && (
-        <section className={`result-panel ${won ? 'win' : 'loss'}`} role="dialog" aria-live="polite">
-          {won && (
-            <img
-              className="result-doctor"
-              src={doctorThumbsUp}
-              alt="Pessoa com jaleco fazendo sinal de positivo"
-            />
-          )}
+        <section className={`result-panel illustrated ${won ? 'win' : 'loss'}`} role="dialog" aria-live="polite">
+          <img
+            className="result-doctor"
+            src={won ? doctorThumbsUp : doctorWrong}
+            alt={won ? 'Pessoa com jaleco fazendo sinal de positivo' : 'Pessoa com jaleco indicando erro'}
+          />
           <div className="result-content">
             <div>
               <span>{won ? 'Acertou' : 'Resposta'}</span>
