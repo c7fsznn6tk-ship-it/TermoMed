@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import { BarChart3, BookOpen, Delete, HeartPulse, HelpCircle, Lightbulb, RotateCcw, X } from 'lucide-react';
 import { terms, type MedicalTerm } from './data/terms';
@@ -58,6 +58,9 @@ function App() {
   const [stats, setStats] = useState<Stats>(() => loadStats());
   const [finished, setFinished] = useState(false);
   const [won, setWon] = useState(false);
+  const [revealingRowIndex, setRevealingRowIndex] = useState<number | null>(null);
+  const [revealedTileCount, setRevealedTileCount] = useState(0);
+  const revealTimeoutsRef = useRef<Array<ReturnType<typeof setTimeout>>>([]);
 
   const evaluations = useMemo(
     () => guesses.map((guess) => evaluateGuess(guess, answer.word)),
@@ -66,27 +69,40 @@ function App() {
 
   const keyStates = useMemo(() => {
     const states: Partial<Record<string, LetterState>> = {};
-    evaluations.flat().forEach(({ letter, state }) => {
-      const previous = states[letter];
-      if (!previous || stateRank[state] > stateRank[previous]) {
-        states[letter] = state;
+    evaluations.forEach((evaluation, rowIndex) => {
+      if (rowIndex === revealingRowIndex) {
+        return;
       }
+
+      evaluation.forEach(({ letter, state }) => {
+        const previous = states[letter];
+        if (!previous || stateRank[state] > stateRank[previous]) {
+          states[letter] = state;
+        }
+      });
     });
     return states;
-  }, [evaluations]);
+  }, [evaluations, revealingRowIndex]);
 
   const revealedHints = useMemo(
-    () => guesses.filter((guess) => guess !== answer.word).slice(0, answer.hints.length),
-    [answer.word, guesses],
+    () =>
+      guesses
+        .filter((guess, index) => index !== revealingRowIndex && guess !== answer.word)
+        .slice(0, answer.hints.length),
+    [answer.word, guesses, revealingRowIndex],
   );
 
   function resetGame() {
+    revealTimeoutsRef.current.forEach((timeout) => clearTimeout(timeout));
+    revealTimeoutsRef.current = [];
     setAnswer((previous) => pickRandomTerm(previous.word));
     setGuesses([]);
     setCurrentLetters(emptyGuess());
     setActiveIndex(0);
     setFinished(false);
     setWon(false);
+    setRevealingRowIndex(null);
+    setRevealedTileCount(0);
     setMessage('Novo termo sorteado.');
   }
 
@@ -113,7 +129,7 @@ function App() {
   function submitGuess() {
     const normalized = normalizeWord(currentLetters.join(''));
 
-    if (finished) {
+    if (finished || revealingRowIndex !== null) {
       return;
     }
 
@@ -128,25 +144,51 @@ function App() {
     }
 
     const nextGuesses = [...guesses, normalized];
+    const submittedRowIndex = guesses.length;
     const didWin = normalized === answer.word;
     const didLose = nextGuesses.length === MAX_ATTEMPTS && !didWin;
     setGuesses(nextGuesses);
     setCurrentLetters(emptyGuess());
     setActiveIndex(0);
+    setRevealingRowIndex(submittedRowIndex);
+    setRevealedTileCount(0);
+    setMessage('Avaliando tentativa...');
 
-    if (didWin || didLose) {
-      setFinished(true);
-      setWon(didWin);
-      recordResult(didWin, nextGuesses.length);
-      setMessage(didWin ? 'Diagnostico fechado.' : `O termo era ${answer.word.toUpperCase()}.`);
-      return;
+    revealTimeoutsRef.current.forEach((timeout) => clearTimeout(timeout));
+    revealTimeoutsRef.current = [];
+
+    for (let index = 0; index < WORD_LENGTH; index += 1) {
+      revealTimeoutsRef.current.push(
+        setTimeout(() => {
+          setRevealedTileCount(index + 1);
+        }, 240 + index * 280),
+      );
     }
 
-    const nextHintNumber = Math.min(nextGuesses.length, answer.hints.length);
-    setMessage(`Dica ${nextHintNumber} liberada.`);
+    revealTimeoutsRef.current.push(
+      setTimeout(() => {
+        setRevealingRowIndex(null);
+        setRevealedTileCount(0);
+
+        if (didWin || didLose) {
+          setFinished(true);
+          setWon(didWin);
+          recordResult(didWin, nextGuesses.length);
+          setMessage(didWin ? 'Diagnostico fechado.' : `O termo era ${answer.word.toUpperCase()}.`);
+          return;
+        }
+
+        const nextHintNumber = Math.min(nextGuesses.length, answer.hints.length);
+        setMessage(`Dica ${nextHintNumber} liberada.`);
+      }, 240 + WORD_LENGTH * 280),
+    );
   }
 
   function handleInput(key: string) {
+    if (revealingRowIndex !== null) {
+      return;
+    }
+
     if (key === 'ArrowLeft') {
       setActiveIndex((value) => Math.max(0, value - 1));
       return;
@@ -198,6 +240,12 @@ function App() {
     return () => window.removeEventListener('keydown', listener);
   });
 
+  useEffect(() => {
+    return () => {
+      revealTimeoutsRef.current.forEach((timeout) => clearTimeout(timeout));
+    };
+  }, []);
+
   const winRate = stats.played ? Math.round((stats.wins / stats.played) * 100) : 0;
 
   return (
@@ -240,6 +288,7 @@ function App() {
             const evaluation = evaluations[rowIndex];
             const isCurrentRow = rowIndex === guesses.length && !finished;
             const letters = guess ?? (isCurrentRow ? currentLetters.join('') : '');
+            const isRevealingRow = rowIndex === revealingRowIndex;
 
             return (
               <div className="board-row" key={rowIndex}>
@@ -247,9 +296,14 @@ function App() {
                   const evaluated = evaluation?.[cellIndex] as EvaluatedLetter | undefined;
                   const letter = isCurrentRow ? currentLetters[cellIndex] : (letters[cellIndex] ?? '');
                   const isActive = isCurrentRow && activeIndex === cellIndex;
+                  const shouldShowEvaluation = Boolean(evaluated && (!isRevealingRow || cellIndex < revealedTileCount));
+                  const isFlipping = isRevealingRow && cellIndex === revealedTileCount && revealedTileCount < WORD_LENGTH;
+                  const isFlipRevealed = isRevealingRow && cellIndex < revealedTileCount;
                   return (
                     <button
-                      className={`tile ${evaluated?.state ?? (letter ? 'filled' : '')} ${isActive ? 'active' : ''}`}
+                      className={`tile ${shouldShowEvaluation ? evaluated?.state : letter ? 'filled' : ''} ${
+                        isActive ? 'active' : ''
+                      } ${isFlipping ? 'flipping' : ''} ${isFlipRevealed ? 'flip-revealed' : ''}`}
                       key={cellIndex}
                       type="button"
                       onClick={() => {

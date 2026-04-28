@@ -201,6 +201,11 @@ button {
   line-height: 1;
   padding: 0;
   overflow: hidden;
+  transform-style: preserve-3d;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
 }
 
 .tile.filled {
@@ -211,6 +216,34 @@ button {
 .tile.active {
   border-color: var(--green);
   box-shadow: 0 0 0 2px rgba(35, 133, 111, 0.22);
+}
+
+.tile.flipping {
+  animation: tile-flip-out 280ms ease-in forwards;
+}
+
+.tile.flip-revealed {
+  animation: tile-flip-in 280ms ease-out both;
+}
+
+@keyframes tile-flip-out {
+  from {
+    transform: rotateX(0deg);
+  }
+
+  to {
+    transform: rotateX(90deg);
+  }
+}
+
+@keyframes tile-flip-in {
+  from {
+    transform: rotateX(-90deg);
+  }
+
+  to {
+    transform: rotateX(0deg);
+  }
 }
 
 .tile.correct,
