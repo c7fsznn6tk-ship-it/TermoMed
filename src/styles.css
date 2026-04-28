@@ -742,7 +742,7 @@ button {
   .result-panel.win {
     width: min(calc(100vw - 18px), 380px);
     min-height: 194px;
-    grid-template-columns: 76px 1fr;
+    grid-template-columns: 96px 1fr;
     align-items: end;
     text-align: left;
     padding: 0;
@@ -751,15 +751,15 @@ button {
   }
 
   .result-doctor {
-    width: 122px;
-    max-height: 190px;
-    transform: translateX(-20px);
+    width: 168px;
+    max-height: 235px;
+    transform: translateX(-48px);
   }
 
   .result-panel.win .result-content {
     min-height: 150px;
-    margin-left: -38px;
-    padding: 18px 18px 18px 96px;
+    margin-left: -54px;
+    padding: 18px 18px 18px 120px;
     border-radius: 24px;
   }
 
