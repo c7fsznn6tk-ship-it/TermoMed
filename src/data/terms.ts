@@ -5,7 +5,7 @@ export type MedicalTerm = {
   hints: string[];
 };
 
-export const terms: MedicalTerm[] = [
+const rawTerms: MedicalTerm[] = [
   {
     word: 'sepse',
     definition: 'Disfuncao organica potencialmente fatal causada por resposta desregulada a infeccao.',
@@ -15,7 +15,7 @@ export const terms: MedicalTerm[] = [
       'O corpo reage de forma descontrolada',
       'Geralmente tem origem infecciosa',
       'Pode comprometer varios orgaos',
-      'Situacao grave que exige urgencia',
+      'Situacao grave que exige urgencia.',
     ],
   },
   {
@@ -27,7 +27,7 @@ export const terms: MedicalTerm[] = [
       'Costuma deixar a regiao aumentada',
       'Pode formar cacifo a digitopressao',
       'Tem relacao com liquido fora dos vasos',
-      'Pode deixar a pele mais tensa',
+      'Nome medico para inchaco.',
     ],
   },
   {
@@ -39,7 +39,7 @@ export const terms: MedicalTerm[] = [
       'Pode vir com calafrios e mal-estar',
       'Costuma sugerir inflamacao ou infeccao',
       'Envolve aumento da temperatura corporal',
-      'Pode ser medida com termometro',
+      'Quando passa de valores normais, chamamos de febre.',
     ],
   },
   {
@@ -51,7 +51,7 @@ export const terms: MedicalTerm[] = [
       'Fica no torax',
       'Ajuda a avaliar tamanho e posicao do coracao',
       'Pode estar desviado em cardiomegalias',
-      'Pode ser sentido com a mao no torax',
+      'Nome do impulso apical palpavel.',
     ],
   },
   {
@@ -63,7 +63,7 @@ export const terms: MedicalTerm[] = [
       'Pode ser inocente ou patologico',
       'E descrito por foco, intensidade e irradiacao',
       'Aparece na ausculta com fluxo turbulento',
-      'Pode mudar conforme a posicao ou manobras',
+      'Ruido cardiaco chamado sopro.',
     ],
   },
   {
@@ -75,7 +75,7 @@ export const terms: MedicalTerm[] = [
       'Fica mais rapido no esforco ou na ansiedade',
       'E avaliado em arterias perifericas',
       'Tem ritmo, amplitude e frequencia',
-      'Batimento arterial palpavel',
+      'Batimento arterial palpavel.',
     ],
   },
   {
@@ -86,8 +86,8 @@ export const terms: MedicalTerm[] = [
       'Tem relacao com filtracao',
       'Pode aparecer em insuficiencia ou colica',
       'Envolve creatinina, ureia e diurese',
-      'Refere-se a um orgao retroperitoneal',
-      'Tem relacao com producao de urina',
+      'Refere-se aos rins',
+      'Adjetivo medico para aquilo que e dos rins.',
     ],
   },
   {
@@ -99,7 +99,7 @@ export const terms: MedicalTerm[] = [
       'Vem depois do jejuno',
       'Absorve sais biliares e vitamina B12',
       'Termina perto da valva ileocecal',
-      'Fica antes do intestino grosso',
+      'Porcao final do intestino delgado.',
     ],
   },
   {
@@ -111,7 +111,7 @@ export const terms: MedicalTerm[] = [
       'Pode ser ascendente, transverso, descendente ou sigmoide',
       'E avaliado em colonoscopia',
       'Participa da absorcao de agua e formacao das fezes',
-      'Pode ser examinado por endoscopia baixa',
+      'Segmento intestinal chamado colon.',
     ],
   },
   {
@@ -123,7 +123,7 @@ export const terms: MedicalTerm[] = [
       'Fica no olho',
       'Relaciona-se com a pupila',
       'Controla a quantidade de luz que entra',
-      'Muda sua aparencia conforme a pigmentacao',
+      'Parte colorida do olho.',
     ],
   },
   {
@@ -135,7 +135,7 @@ export const terms: MedicalTerm[] = [
       'Nao e a camada mais superficial',
       'Contem vasos, nervos e anexos cutaneos',
       'Fica abaixo da epiderme',
-      'Contem estruturas que nutrem a pele',
+      'Camada cutanea chamada derme.',
     ],
   },
   {
@@ -147,7 +147,7 @@ export const terms: MedicalTerm[] = [
       'Pode aparecer em mucosas',
       'No estomago, pode ter relacao com H. pylori',
       'E uma perda de substancia do revestimento',
-      'Forma latina ou sem acento de ulcera',
+      'Forma latina/sem acento de ulcera.',
     ],
   },
   {
@@ -159,7 +159,7 @@ export const terms: MedicalTerm[] = [
       'Pode ser benigno ou maligno',
       'Pode ser palpavel ou visto em imagem',
       'Representa aumento de volume ou massa',
-      'Pode ter origem inflamatoria ou neoplasica',
+      'Termo medico para massa ou neoplasia.',
     ],
   },
   {
@@ -171,7 +171,7 @@ export const terms: MedicalTerm[] = [
       'Pode causar surtos e epidemias',
       'Depende de celulas para se multiplicar',
       'Pode ser prevenido por algumas vacinas',
-      'Agente infeccioso acelular',
+      'Agente infeccioso acelular.',
     ],
   },
   {
@@ -183,7 +183,7 @@ export const terms: MedicalTerm[] = [
       'Envolve contracoes uterinas',
       'E dividido em periodos',
       'Termina com nascimento e dequitacao',
-      'Pode ocorrer apos trabalho progressivo',
+      'Processo de nascimento.',
     ],
   },
   {
@@ -195,7 +195,7 @@ export const terms: MedicalTerm[] = [
       'Podem apresentar nodulos ou secrecao',
       'Tem relacao com lactacao',
       'Sao rastreadas por mamografia',
-      'Podem mudar durante gestacao e lactacao',
+      'Glandulas mamarias.',
     ],
   },
   {
@@ -207,7 +207,7 @@ export const terms: MedicalTerm[] = [
       'Pode ser sensitivo, motor ou misto',
       'Sua lesao pode causar dor, fraqueza ou dormencia',
       'E formado por fibras neuronais',
-      'Pode transmitir sinais sensitivos ou motores',
+      'Estrutura neurologica chamada nervo.',
     ],
   },
   {
@@ -219,7 +219,7 @@ export const terms: MedicalTerm[] = [
       'Indica estruturas em dupla',
       'Na neurologia, costuma vir junto de cranianos',
       'Existem doze quando falamos dos cranianos',
-      'Pode nomear estruturas bilaterais',
+      'Plural usado em pares cranianos.',
     ],
   },
   {
@@ -231,7 +231,7 @@ export const terms: MedicalTerm[] = [
       'Historicamente causou paralisia infantil',
       'Pode acometer neuronios motores',
       'Tem relacao com paralisia flacida aguda',
-      'Forma curta de poliomielite',
+      'Forma curta de poliomielite.',
     ],
   },
   {
@@ -243,7 +243,7 @@ export const terms: MedicalTerm[] = [
       'E um sintoma respiratorio comum',
       'Pode vir com secrecao, febre ou falta de ar',
       'E um reflexo de defesa das vias aereas',
-      'Pode piorar a noite ou com irritantes',
+      'Ato de expulsar ar para limpar as vias respiratorias.',
     ],
   },
   {
@@ -255,7 +255,7 @@ export const terms: MedicalTerm[] = [
       'Pode ocorrer na pele, musculo, nervo ou orgao',
       'Pode ser descrita por tamanho, forma e local',
       'Indica dano ou alteracao de tecido',
-      'Pode ser estrutural ou funcional',
+      'Termo geral para dano anatomico ou funcional.',
     ],
   },
   {
@@ -267,7 +267,7 @@ export const terms: MedicalTerm[] = [
       'Podem ficar dilatadas em varizes',
       'Podem ser usadas para acesso venoso',
       'Levam sangue em direcao ao coracao',
-      'Podem ser visiveis sob a pele',
+      'Vasos opostos as arterias no retorno circulatorio.',
     ],
   },
   {
@@ -276,10 +276,10 @@ export const terms: MedicalTerm[] = [
     category: 'Otorrinolaringologia',
     hints: [
       'Tem relacao com um sentido',
-      'Adjetivo medico para o que e do ouvido',
+      'Pode aparecer em gotas ou solucao',
       'Refere-se a estrutura avaliada pelo otoscopio',
       'Esta ligado ao ouvido',
-      'Loja que vende óculos (masculino)',
+      'Adjetivo medico para o que e do ouvido.',
     ],
   },
   {
@@ -291,7 +291,7 @@ export const terms: MedicalTerm[] = [
       'Tem pelos e glandulas sudoriparas',
       'Pode ter linfonodos palpaveis',
       'Fica abaixo do ombro',
-      'E regiao comum para afericao de temperatura',
+      'Regiao popularmente chamada sovaco.',
     ],
   },
   {
@@ -303,7 +303,7 @@ export const terms: MedicalTerm[] = [
       'Indica uma depressao ou cavidade',
       'Pode ser nasal, iliaca ou poplitea',
       'Ajuda a localizar estruturas no exame',
-      'Pode ajudar a nomear regioes do corpo',
+      'Nome anatomico para uma depressao.',
     ],
   },
   {
@@ -315,7 +315,7 @@ export const terms: MedicalTerm[] = [
       'Tambem pode lembrar calafrios intensos',
       'Tem relacao com endurecimento ou rigidez',
       'Em ingles medico, pode significar calafrio importante',
-      'Pode aparecer junto de febre alta',
+      'Termo associado a rigidez.',
     ],
   },
   {
@@ -327,7 +327,7 @@ export const terms: MedicalTerm[] = [
       'Envolve mais casos que o esperado',
       'E investigado pela vigilancia epidemiologica',
       'Pode ter origem infecciosa ou alimentar',
-      'Aumento localizado de casos',
+      'Aumento localizado de casos.',
     ],
   },
   {
@@ -339,7 +339,7 @@ export const terms: MedicalTerm[] = [
       'Pode reduzir a necessidade de sono',
       'Pode cursar com impulsividade e grandiosidade',
       'E um polo do transtorno bipolar',
-      'Pode vir com fala acelerada e pouca necessidade de sono',
+      'Episodio de humor elevado chamado mania.',
     ],
   },
   {
@@ -351,7 +351,7 @@ export const terms: MedicalTerm[] = [
       'Avalia cinco criterios do recem-nascido',
       'Costuma ser medido no primeiro e quinto minuto',
       'Inclui cor, pulso, grimaca, atividade e respiracao',
-      'Escore neonatal chamado Apgar',
+      'Escore neonatal chamado Apgar.',
     ],
   },
   {
@@ -363,9 +363,241 @@ export const terms: MedicalTerm[] = [
       'Pode ser observado pelo examinador',
       'Pode aparecer no exame fisico',
       'E um achado objetivo',
-      'Ajuda o examinador a sustentar uma hipotese clinica',
+      'Termo semiologico oposto a queixa subjetiva.',
+    ],
+  },
+  {
+    word: 'anexo',
+    definition: 'Estrutura associada a outro orgao ou tecido, como anexos uterinos ou cutaneos.',
+    category: 'Anatomia',
+    hints: [
+      'Costuma acompanhar outra estrutura',
+      'Pode aparecer em laudos de imagem',
+      'Pode ter relacao com pele ou ginecologia',
+      'Nem sempre e o orgao principal avaliado',
+      'Indica algo ligado a uma estrutura maior.',
+    ],
+  },
+  {
+    word: 'apice',
+    definition: 'Extremidade ou ponto mais alto de uma estrutura anatomica.',
+    category: 'Anatomia',
+    hints: [
+      'Pode aparecer em anatomia',
+      'Indica uma extremidade',
+      'Pode ser usado para pulmao, coracao ou dente',
+      'Costuma apontar para a ponta de uma estrutura',
+      'Termo anatomico para ponto terminal ou superior.',
+    ],
+  },
+  {
+    word: 'apnea',
+    definition: 'Pausa temporaria da respiracao.',
+    category: 'Pneumologia',
+    hints: [
+      'Pode ocorrer durante o sono',
+      'Tem relacao com respiracao interrompida',
+      'Pode vir com roncos ou sonolencia',
+      'Pode ser observada por outra pessoa',
+      'Indica uma pausa respiratoria.',
+    ],
+  },
+  {
+    word: 'bolha',
+    definition: 'Lesao elevada da pele contendo liquido.',
+    category: 'Dermatologia',
+    hints: [
+      'Pode surgir apos atrito ou queimadura',
+      'Fica elevada na pele',
+      'Costuma conter liquido',
+      'Pode romper e deixar area sensivel',
+      'Lesao cutanea preenchida por fluido.',
+    ],
+  },
+  {
+    word: 'carie',
+    definition: 'Processo de desmineralizacao e destruicao progressiva do tecido dentario.',
+    category: 'Odontologia',
+    hints: [
+      'Pode causar dor ao mastigar',
+      'Tem relacao com dentes',
+      'Pode piorar com acucar e higiene inadequada',
+      'Pode formar cavidades',
+      'E comum em avaliacao odontologica.',
+    ],
+  },
+  {
+    word: 'cisto',
+    definition: 'Cavidade patologica ou anatomica revestida, geralmente contendo liquido.',
+    category: 'Clinica',
+    hints: [
+      'Pode aparecer em exames de imagem',
+      'Pode conter liquido',
+      'Nem sempre indica malignidade',
+      'Pode ocorrer em varios orgaos',
+      'E uma formacao arredondada ou encapsulada.',
+    ],
+  },
+  {
+    word: 'clono',
+    definition: 'Sequencia de contracoes musculares involuntarias provocadas por estiramento brusco.',
+    category: 'Neurologia',
+    hints: [
+      'E pesquisado no exame neurologico',
+      'Tem relacao com reflexos aumentados',
+      'Pode aparecer em lesao piramidal',
+      'Envolve contracoes repetidas',
+      'Pode ser observado no tornozelo ou joelho.',
+    ],
+  },
+  {
+    word: 'facie',
+    definition: 'Aspecto geral da face que pode sugerir determinadas condicoes clinicas.',
+    category: 'Semiologia',
+    hints: [
+      'E observado antes mesmo do exame completo',
+      'Tem relacao com expressao facial',
+      'Pode sugerir sindromes ou gravidade',
+      'Faz parte da impressao clinica inicial',
+      'Aspecto caracteristico do rosto.',
+    ],
+  },
+  {
+    word: 'glote',
+    definition: 'Regiao da laringe relacionada as pregas vocais e a passagem de ar.',
+    category: 'Otorrinolaringologia',
+    hints: [
+      'Fica nas vias aereas superiores',
+      'Tem relacao com a voz',
+      'Pode ser importante na intubacao',
+      'Envolve abertura entre pregas vocais',
+      'Estrutura avaliada na laringe.',
+    ],
+  },
+  {
+    word: 'linfa',
+    definition: 'Liquido do sistema linfatico relacionado ao retorno de fluidos e resposta imune.',
+    category: 'Imunologia',
+    hints: [
+      'Circula fora dos vasos sanguineos principais',
+      'Tem relacao com linfonodos',
+      'Participa da defesa do organismo',
+      'Pode acumular em alguns edemas',
+      'Liquido transportado pelo sistema linfatico.',
+    ],
+  },
+  {
+    word: 'lupus',
+    definition: 'Doenca autoimune sistemica que pode acometer pele, articulacoes, rins e outros orgaos.',
+    category: 'Reumatologia',
+    hints: [
+      'Pode afetar pele e articulacoes',
+      'Tem relacao com autoimunidade',
+      'Pode piorar com exposicao solar',
+      'Pode alterar exames de anticorpos',
+      'Doenca sistemica com surtos e remissoes.',
+    ],
+  },
+  {
+    word: 'mioma',
+    definition: 'Tumor benigno do musculo liso uterino.',
+    category: 'Ginecologia',
+    hints: [
+      'Pode aumentar sangramento menstrual',
+      'Tem relacao com o utero',
+      'Pode ser visto em ultrassom',
+      'Nem sempre causa sintomas',
+      'Tumor benigno frequente em ginecologia.',
+    ],
+  },
+  {
+    word: 'prion',
+    definition: 'Proteina infecciosa anormal associada a doencas neurodegenerativas raras.',
+    category: 'Infectologia',
+    hints: [
+      'Nao e bacteria nem virus',
+      'Tem relacao com proteinas alteradas',
+      'Pode afetar o sistema nervoso',
+      'E associado a doencas raras',
+      'Agente infeccioso sem acido nucleico.',
+    ],
+  },
+  {
+    word: 'prono',
+    definition: 'Posicao corporal em decubito ventral, com a face voltada para baixo.',
+    category: 'Semiologia',
+    hints: [
+      'E uma posicao do corpo',
+      'Pode ser usada em cuidados respiratorios',
+      'Ocorre com o abdomen voltado para baixo',
+      'E o contrario de ficar de barriga para cima',
+      'Posicao em decubito ventral.',
+    ],
+  },
+  {
+    word: 'ptose',
+    definition: 'Queda ou deslocamento inferior de uma estrutura, como palpebra ou orgao.',
+    category: 'Semiologia',
+    hints: [
+      'Pode ser observada na face',
+      'Tem relacao com queda de estrutura',
+      'Pode afetar a palpebra',
+      'Pode sugerir alteracao neurologica ou muscular',
+      'Indica descenso anormal.',
+    ],
+  },
+  {
+    word: 'raiva',
+    definition: 'Doenca viral grave transmitida principalmente por mordedura de mamiferos infectados.',
+    category: 'Infectologia',
+    hints: [
+      'Pode ser transmitida por mordida',
+      'Tem relacao com mamiferos',
+      'E prevenivel apos exposicao',
+      'Pode acometer o sistema nervoso',
+      'Zoonose viral de alta gravidade.',
+    ],
+  },
+  {
+    word: 'rubor',
+    definition: 'Vermelhidao local associada a aumento de fluxo sanguineo, comum na inflamacao.',
+    category: 'Semiologia',
+    hints: [
+      'Pode aparecer em pele inflamada',
+      'Tem relacao com aumento de vascularizacao',
+      'Costuma acompanhar calor local',
+      'E um dos sinais classicos de inflamacao',
+      'Indica vermelhidao observavel.',
+    ],
+  },
+  {
+    word: 'ureia',
+    definition: 'Produto do metabolismo proteico eliminado principalmente pelos rins.',
+    category: 'Nefrologia',
+    hints: [
+      'Aparece em exames laboratoriais',
+      'Tem relacao com funcao renal',
+      'Pode aumentar em desidratacao ou insuficiencia renal',
+      'Deriva do metabolismo de proteinas',
+      'Substancia eliminada pela urina.',
+    ],
+  },
+  {
+    word: 'variz',
+    definition: 'Veia dilatada e tortuosa, geralmente observada em membros inferiores.',
+    category: 'Vascular',
+    hints: [
+      'Pode aparecer nas pernas',
+      'Tem relacao com circulacao venosa',
+      'Pode causar peso ou dor local',
+      'Fica mais visivel sob a pele',
+      'Veia dilatada e tortuosa.',
     ],
   },
 ];
+
+export const terms: MedicalTerm[] = rawTerms.filter(
+  (term) => term.word.length === 5 && term.hints.length === 5,
+);
 
 export const validWords = Array.from(new Set(terms.map((term) => term.word))).sort();
