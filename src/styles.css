@@ -753,7 +753,7 @@ button {
   .result-doctor {
     width: 168px;
     max-height: 235px;
-    transform: translateX(-48px);
+    transform: translateX(-28px);
   }
 
   .result-panel.win .result-content {
