@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
-import { BarChart3, BookOpen, HeartPulse, HelpCircle, Lightbulb, RotateCcw, X } from 'lucide-react';
+import { BarChart3, BookOpen, Delete, HeartPulse, HelpCircle, Lightbulb, RotateCcw, X } from 'lucide-react';
 import { terms, type MedicalTerm } from './data/terms';
 import { evaluateGuess, type EvaluatedLetter, type LetterState } from './game/evaluateGuess';
 import { normalizeWord } from './game/normalizeWord';
 import { pickRandomTerm } from './game/pickTerm';
+import doctorThumbsUp from './images/DeAssisPolegar01.webp';
 
 const WORD_LENGTH = 5;
 const MAX_ATTEMPTS = 6;
@@ -146,6 +147,16 @@ function App() {
   }
 
   function handleInput(key: string) {
+    if (key === 'ArrowLeft') {
+      setActiveIndex((value) => Math.max(0, value - 1));
+      return;
+    }
+
+    if (key === 'ArrowRight') {
+      setActiveIndex((value) => Math.min(WORD_LENGTH - 1, value + 1));
+      return;
+    }
+
     if (key === 'Enter') {
       submitGuess();
       return;
@@ -261,12 +272,21 @@ function App() {
 
       {finished && (
         <section className={`result-panel ${won ? 'win' : 'loss'}`} role="dialog" aria-live="polite">
-          <div>
-            <span>{won ? 'Acertou' : 'Resposta'}</span>
-            <strong>{answer.word.toUpperCase()}</strong>
+          {won && (
+            <img
+              className="result-doctor"
+              src={doctorThumbsUp}
+              alt="Pessoa com jaleco fazendo sinal de positivo"
+            />
+          )}
+          <div className="result-content">
+            <div>
+              <span>{won ? 'Acertou' : 'Resposta'}</span>
+              <strong>{answer.word.toUpperCase()}</strong>
+            </div>
+            <p>{answer.definition}</p>
+            <small>{answer.category}</small>
           </div>
-          <p>{answer.definition}</p>
-          <small>{answer.category}</small>
         </section>
       )}
 
@@ -290,7 +310,7 @@ function App() {
             )}
             {row.backspace && (
               <button className="key wide" type="button" onClick={() => handleInput('Backspace')} aria-label="Apagar">
-                <X size={20} />
+                <Delete size={20} />
               </button>
             )}
           </div>
