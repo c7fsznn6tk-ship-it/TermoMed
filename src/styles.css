@@ -367,10 +367,10 @@ button {
   z-index: 2;
   width: min(28vw, 220px);
   max-height: 300px;
-  transform: translateX(-154px);
   object-fit: contain;
   object-position: bottom left;
   align-self: end;
+  transform: translateX(-154px);
   filter: drop-shadow(0 12px 20px rgba(23, 59, 52, 0.2));
 }
 
