@@ -409,6 +409,29 @@ button {
   line-height: 1.35;
 }
 
+.result-next-button {
+  width: fit-content;
+  min-height: 42px;
+  margin-top: 4px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: var(--green);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(35, 133, 111, 0.24);
+}
+
+.result-next-button:hover {
+  filter: brightness(1.08);
+}
+
 .keyboard {
   align-self: end;
   display: grid;
@@ -776,6 +799,12 @@ button {
     max-width: 210px;
     font-size: 0.82rem;
     line-height: 1.28;
+  }
+
+  .result-next-button {
+    min-height: 38px;
+    padding: 0 12px;
+    font-size: 0.76rem;
   }
 
   .result-panel.illustrated small,

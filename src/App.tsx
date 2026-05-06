@@ -96,7 +96,8 @@ function App() {
   function resetGame() {
     revealTimeoutsRef.current.forEach((timeout) => clearTimeout(timeout));
     revealTimeoutsRef.current = [];
-    setAnswer((previous) => pickRandomTerm(previous.word));
+    const nextAnswer = pickRandomTerm(answer.word);
+    setAnswer(nextAnswer);
     setGuesses([]);
     setCurrentLetters(emptyGuess());
     setActiveIndex(0);
@@ -104,7 +105,7 @@ function App() {
     setWon(false);
     setRevealingRowIndex(null);
     setRevealedTileCount(0);
-    setMessage('Novo termo sorteado.');
+    setMessage(`Novo termo sorteado: ${nextAnswer.category}.`);
   }
 
   function recordResult(didWin: boolean, attemptCount: number) {
@@ -268,9 +269,7 @@ function App() {
           <button
             className="icon-button"
             type="button"
-            onClick={() => {
-              resetGame();
-            }}
+            onClick={resetGame}
             aria-label="Reiniciar treino"
           >
             <RotateCcw size={22} />
@@ -339,6 +338,10 @@ function App() {
             </div>
             <p>{answer.definition}</p>
             <small>{answer.category}</small>
+            <button className="result-next-button" type="button" onClick={resetGame}>
+              <RotateCcw size={18} />
+              Nova palavra
+            </button>
           </div>
         </section>
       )}
